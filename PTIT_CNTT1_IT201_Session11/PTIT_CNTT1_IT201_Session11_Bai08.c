@@ -44,19 +44,25 @@ Node *deleteHead(Node *head) {
    if (head == NULL) { return NULL; }
    Node *temp = head;
    head = head->next;
+   if (head != NULL) {
+      head->prev = NULL;
+   }
    free(temp);
    return head;
 }
 Node *deleteTail(Node *head) {
    if (head==NULL) { return NULL; }
+   if (head->next == NULL) {
+      free(head);
+      return NULL;
+   }
    Node *current = head;
    while (current->next != NULL) {
       current = current->next;
    }
-   Node *temp = current;
-   current = current->prev;
-   current->next = NULL;
-   free(temp);
+   Node *prev = current->prev;
+   prev->next = NULL;
+   free(current);
    return head;
 }
 Node *deleteAt(Node *head, int index) {
