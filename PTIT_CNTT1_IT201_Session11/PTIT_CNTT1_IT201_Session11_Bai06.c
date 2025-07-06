@@ -34,6 +34,9 @@ Node *deleteHead(Node *head) {
    if (head==NULL) { return NULL; }
    Node *temp = head;
    head = head->next;
+   if (head != NULL) {
+        head->prev = NULL;  
+    }
    free(temp);
    return head;
 }
